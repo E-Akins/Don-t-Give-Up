@@ -6,10 +6,11 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_runner</sprite>
     <sprite>sprites\spr_coach</sprite>
+    <sprite>sprites\spr_runner</sprite>
     <sprite>sprites\spr_gorund</sprite>
     <sprite>sprites\spr_bird</sprite>
+    <sprite>sprites\spr_rain</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
