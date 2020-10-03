@@ -7,9 +7,37 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_runner</sprite>
+    <sprite>sprites\spr_coach</sprite>
+    <sprite>sprites\spr_gorund</sprite>
+    <sprite>sprites\spr_bird</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <fonts name="fonts">
+    <font>fonts\ft_title</font>
+    <font>fonts\ft_points</font>
+    <font>fonts\ft_start_menu</font>
+  </fonts>
+  <objects name="objects">
+    <object>objects\obj_runner</object>
+    <object>objects\obj_coach</object>
+    <object>objects\obj_ground</object>
+    <object>objects\obj_start_menu</object>
+    <object>objects\obj_fade</object>
+    <objects name="Obstacles">
+      <object>objects\obj_fence</object>
+    </objects>
+    <objects name="Power Ups">
+      <object>objects\obj_rain</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\obj_bird</object>
+    </objects>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\rm_menu</room>
+    <room>rooms\rm_game</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
