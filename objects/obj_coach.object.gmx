@@ -3,7 +3,7 @@
   <spriteName>spr_coach</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-2</depth>
+  <depth>-3</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>spd = 10
+            <string>spd = 25
 
 </string>
           </argument>
@@ -75,13 +75,15 @@ instance_create(x+irandom(320),y+300,obj_rain)
           <argument>
             <kind>1</kind>
             <string>
-x += max(keyboard_check(vk_right),0)*spd
-x -= max(keyboard_check(vk_left),0)*spd
+if (instance_exists(obj_runner)) x += obj_runner.hspd
 
-y += max(keyboard_check(vk_down),0)*spd
-y -= max(keyboard_check(vk_up),0)*spd
+x += max(keyboard_check(ord("D")),0)*spd
+x -= max(keyboard_check(ord("A")),0)*spd
 
-x = clamp(x,view_xport[0],view_xport[0]+view_wport[0]-320)
+y += max(keyboard_check(ord("S")),0)*spd
+y -= max(keyboard_check(ord("W")),0)*spd
+
+x = clamp(x,view_xport[0],obj_runner.x+1000-320)
 y = clamp(y,view_yport[0],view_yport[0]+view_hport[0]-320)
 
 if (keyboard_check(ord("J")))
