@@ -48,7 +48,6 @@ menu3 = c_black
 menu4 = c_black
 
 //default highscores
-highscore_clear()
 highscore_add("TEM",10)
 highscore_add("PER",9)
 highscore_add("ARP",8)
@@ -59,7 +58,6 @@ highscore_add("KEY",4)
 highscore_add("POP",3)
 highscore_add("JFK",2)
 highscore_add("IRS",1)
-
 
 </string>
           </argument>

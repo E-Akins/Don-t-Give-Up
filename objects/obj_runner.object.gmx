@@ -170,7 +170,8 @@ else
     if (x&gt;room_width) 
     {
         x-=room_width
-        if (instance_exists(obj_coach)) obj_coach.x -= room_width   
+        if (instance_exists(obj_coach)) obj_coach.x -= room_width 
+        obj_gnd_manager.spawned = true  
     }
 }
 

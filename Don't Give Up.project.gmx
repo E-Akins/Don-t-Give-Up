@@ -11,11 +11,13 @@
     <sprite>sprites\spr_gorund</sprite>
     <sprite>sprites\spr_bird</sprite>
     <sprite>sprites\spr_rain</sprite>
-    <sprite>sprites\spr_decoration</sprite>
     <sprite>sprites\spr_drink</sprite>
     <sprite>sprites\spr_bear_sleep</sprite>
     <sprite>sprites\spr_bear_awake</sprite>
     <sprite>sprites\spr_cloud</sprite>
+    <sprite>sprites\spr_manager</sprite>
+    <sprite>sprites\spr_flower1</sprite>
+    <sprite>sprites\spr_flower2</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_forest</background>
@@ -36,13 +38,14 @@
     <object>objects\obj_runner</object>
     <object>objects\obj_coach</object>
     <object>objects\obj_ground</object>
-    <object>objects\obj_start_menu</object>
+    <object>objects\obj_cloud</object>
     <object>objects\obj_fade</object>
-    <object>objects\obj_decoration</object>
     <object>objects\obj_score</object>
     <object>objects\obj_start_timer</object>
-    <object>objects\obj_cloud</object>
-    <object>objects\obj_obstacle_manager</object>
+    <object>objects\obj_gnd_manager</object>
+    <object>objects\obj_air_manager</object>
+    <object>objects\obj_gnd_object</object>
+    <object>objects\obj_air_object</object>
     <objects name="Obstacles">
       <object>objects\obj_bear</object>
     </objects>
@@ -53,6 +56,7 @@
     <objects name="Enemies">
       <object>objects\obj_bird</object>
     </objects>
+    <object>objects\obj_start_menu</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_start</room>
