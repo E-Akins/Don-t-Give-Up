@@ -12,8 +12,15 @@
     <sprite>sprites\spr_bird</sprite>
     <sprite>sprites\spr_rain</sprite>
     <sprite>sprites\spr_decoration</sprite>
+    <sprite>sprites\spr_drink</sprite>
+    <sprite>sprites\spr_bear_sleep</sprite>
+    <sprite>sprites\spr_bear_awake</sprite>
+    <sprite>sprites\spr_cloud</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_forest</background>
+    <background>background\bg_forest2</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\scr_initialize.gml</script>
@@ -34,17 +41,21 @@
     <object>objects\obj_decoration</object>
     <object>objects\obj_score</object>
     <object>objects\obj_start_timer</object>
+    <object>objects\obj_cloud</object>
+    <object>objects\obj_obstacle_manager</object>
     <objects name="Obstacles">
-      <object>objects\obj_fence</object>
+      <object>objects\obj_bear</object>
     </objects>
     <objects name="Power Ups">
       <object>objects\obj_rain</object>
+      <object>objects\obj_drink</object>
     </objects>
     <objects name="Enemies">
       <object>objects\obj_bird</object>
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_start</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_game</room>
   </rooms>

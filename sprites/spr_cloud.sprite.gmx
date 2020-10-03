@@ -7,10 +7,10 @@
   <coltolerance>0</coltolerance>
   <sepmasks>0</sepmasks>
   <bboxmode>0</bboxmode>
-  <bbox_left>37</bbox_left>
-  <bbox_right>461</bbox_right>
-  <bbox_top>56</bbox_top>
-  <bbox_bottom>459</bbox_bottom>
+  <bbox_left>68</bbox_left>
+  <bbox_right>431</bbox_right>
+  <bbox_top>123</bbox_top>
+  <bbox_bottom>384</bbox_bottom>
   <HTile>0</HTile>
   <VTile>0</VTile>
   <TextureGroups>
@@ -20,7 +20,6 @@
   <width>500</width>
   <height>500</height>
   <frames>
-    <frame index="0">images\spr_coach_0.png</frame>
-    <frame index="1">images\spr_coach_1.png</frame>
+    <frame index="0">images\spr_cloud_0.png</frame>
   </frames>
 </sprite>

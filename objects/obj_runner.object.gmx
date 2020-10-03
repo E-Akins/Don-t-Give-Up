@@ -35,6 +35,33 @@ grav = 1.25
 
 image_speed = .5
 
+boosted = false
+points_delay = 5
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+boosted = false
+
 </string>
           </argument>
         </arguments>
@@ -138,22 +165,28 @@ else
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (x&gt;room_width) 
-{
-    x-=room_width
-    obj_coach.x -= room_width
+            <string>if (room == rm_game)
+{    
+    if (x&gt;room_width) 
+    {
+        x-=room_width
+        if (instance_exists(obj_coach)) obj_coach.x -= room_width   
+    }
 }
 
-if (x&lt;0) 
+if (room == rm_menu)
 {
-    x+=room_width
-    obj_coach.x += room_width
+    if (x&gt;room_width+350) 
+    {
+        x -=room_width
+        x -= 600
+    }
 }
 
 // View Follow
 // Stops the screen from flashing when the jump happens
 
-if (obj_start_timer.time &lt; 0) view_xview[0] = x - 600
+if (instance_exists(obj_start_timer)) if (obj_start_timer.time &lt; 0) view_xview[0] = x - 600
 
 
 </string>
@@ -179,14 +212,33 @@ if (obj_start_timer.time &lt; 0) view_xview[0] = x - 600
           <argument>
             <kind>1</kind>
             <string>
-if (obj_start_timer.time &lt; 0) 
+if (room = rm_game)
 {
-    // View Follow and Movement
-    view_xview[0] = x - 600
+    if (obj_start_timer.time &lt; 0) 
+    {
+        // Boosted Powerup 
+        if (boosted)
+        {
+            hspd = 30
+            points_delay = 2
+        }
+        else
+        {
+            hspd = 20
+            points_delay = 5
+        } 
     
-    // Add points
-    if (alarm[2] == -1) alarm[2] = 5    
-    
+        // View Follow and Movement
+        view_xview[0] = x - 600
+        
+        // Add points
+        if (alarm[2] == -1) alarm[2] = points_delay     
+    }
+}
+
+if (room = rm_menu)
+{
+    hspd = 20
 }
 
 // Collision Events
@@ -203,6 +255,66 @@ x += hspd
 
 // Shrink to normal size
 if (shrink) if (alarm[1] == -1) alarm[1] = 2
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_bear">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+if (image_xscale &gt;= 2)
+{
+    other.sprite_index = spr_bear_awake
+    other.fly = true
+}
+else
+{
+    // Game Over and runner falls off screen
+    room_restart()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_drink">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>boosted = true
+alarm[3] = 40
+
+instance_destroy(other)
 
 </string>
           </argument>

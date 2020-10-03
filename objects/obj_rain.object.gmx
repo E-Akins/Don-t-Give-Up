@@ -50,11 +50,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>y += 20
- 
+            <string>
+y += 20
 if (y &gt; view_yport[0]+view_hport[0]) instance_destroy()
  
-
 </string>
           </argument>
         </arguments>
