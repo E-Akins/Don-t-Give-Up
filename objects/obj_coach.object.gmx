@@ -50,7 +50,11 @@
           <argument>
             <kind>1</kind>
             <string>
-instance_create(x+irandom(320),y+300,obj_rain)
+var pos_x = irandom(320)
+
+instance_create(x+pos_x,y+300,obj_rain)
+instance_create(x+pos_x+room_width*-1,y+300,obj_rain)
+instance_create(x+pos_x+room_width*1,y+300,obj_rain)
 
 </string>
           </argument>
@@ -77,20 +81,21 @@ instance_create(x+irandom(320),y+300,obj_rain)
             <string>
 if (instance_exists(obj_runner)) x += obj_runner.hspd
 
-x += max(keyboard_check(ord("D")),0)*spd
-x -= max(keyboard_check(ord("A")),0)*spd
-
-y += max(keyboard_check(ord("S")),0)*spd
-y -= max(keyboard_check(ord("W")),0)*spd
-
-x = clamp(x,view_xport[0],obj_runner.x+1000-320)
-y = clamp(y,view_yport[0],view_yport[0]+view_hport[0]-320)
-
-if (keyboard_check(ord("J")))
+if (obj_start_timer.time &lt; 0)
 {
-    if (alarm[0] == -1) alarm[0] = 2
-}
 
+    x += max(keyboard_check(ord("D")),0)*spd
+    x -= max(keyboard_check(ord("A")),0)*spd
+    
+    y += max(keyboard_check(ord("S")),0)*spd
+    y -= max(keyboard_check(ord("W")),0)*spd
+    
+    //x = clamp(x,view_xport[0],obj_runner.x+1000-320)
+    y = clamp(y,view_yport[0]-250,view_yport[0]+view_hport[0]-250)
+    
+    if (keyboard_check(ord("J"))) if (alarm[0] == -1) alarm[0] = 2
+
+}
 </string>
           </argument>
         </arguments>

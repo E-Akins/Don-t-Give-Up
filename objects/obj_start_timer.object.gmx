@@ -25,7 +25,59 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>points = 0
+            <string>// This object displays a start timer when the game begins that will count down
+// When it reaches zero, the runner and coach will come on screen and the game will begin
+
+time = 3
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+time -= 1
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (alarm[0] == -1 &amp;&amp; time &gt; -1) alarm[0] = 20
 </string>
           </argument>
         </arguments>
@@ -49,14 +101,23 @@
           <argument>
             <kind>1</kind>
             <string>
-if (obj_start_timer.time &lt; 0)
+if (time &gt; 0)
 {
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_right)
-    draw_set_font(ft_points)
-    draw_text(display_get_gui_width(),0,string(points) + " m")
+    draw_set_font(ft_start_timer)
+    draw_set_color(c_black)
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_middle)
+    draw_text(display_get_gui_width()/2,display_get_height()/3,time)
 }
 
+if (time == 0)
+{
+    draw_set_font(ft_start_timer)
+    draw_set_color(c_black)
+    draw_set_halign(fa_center)
+    draw_set_valign(fa_middle)
+    draw_text(display_get_gui_width()/2,display_get_height()/3,"GO!")    
+}
 </string>
           </argument>
         </arguments>

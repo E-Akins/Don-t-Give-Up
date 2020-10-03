@@ -40,6 +40,31 @@ image_speed = .5
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+if (instance_exists(obj_score)) obj_score.points += 1
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="2" enumb="1">
       <action>
         <libid>1</libid>
@@ -127,7 +152,10 @@ if (x&lt;0)
 
 // View Follow
 // Stops the screen from flashing when the jump happens
-view_xview[0] = x - 600
+
+if (obj_start_timer.time &lt; 0) view_xview[0] = x - 600
+
+
 </string>
           </argument>
         </arguments>
@@ -151,8 +179,15 @@ view_xview[0] = x - 600
           <argument>
             <kind>1</kind>
             <string>
-// View Follow
-view_xview[0] = x - 600
+if (obj_start_timer.time &lt; 0) 
+{
+    // View Follow and Movement
+    view_xview[0] = x - 600
+    
+    // Add points
+    if (alarm[2] == -1) alarm[2] = 5    
+    
+}
 
 // Collision Events
 vspd += grav
@@ -163,6 +198,7 @@ if (place_meeting(x,y+vspd,obj_ground))
 }
 y += vspd
 
+// Horizontal Movement
 x += hspd
 
 // Shrink to normal size

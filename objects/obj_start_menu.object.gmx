@@ -8,6 +8,64 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+flash = false
+menu = false
+cursor = 0
+
+menu0 = c_black
+menu1 = c_black
+menu2 = c_black
+menu3 = c_black
+menu4 = c_black
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+flash = !flash
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -25,11 +83,79 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(vk_enter))
+            <string>if (alarm[0] == -1 &amp;&amp; menu = false) alarm[0] = 5
+
+if (menu &amp;&amp; !instance_exists(obj_fade))
 {
-    inst = instance_create(0,0,obj_fade)
-    inst.destination = rm_game
+    cursor += max(keyboard_check_pressed(vk_down),0)
+    cursor -= max(keyboard_check_pressed(vk_up),0)
+    cursor = scr_clamp_w_loop(cursor,0,4)
+    
+    menu0 = c_black
+    menu1 = c_black
+    menu2 = c_black
+    menu3 = c_black
+    menu4 = c_black
+    
+    switch (cursor)
+    {
+        case 0:
+            menu0 = c_blue
+            break
+        case 1:
+            menu1 = c_blue
+            break            
+        case 2:
+            menu2 = c_blue
+            break        
+        case 3:
+            menu3 = c_blue
+            break        
+        case 4:
+            menu4 = c_blue
+            break        
+    }
+    
+    if (keyboard_check_pressed(vk_enter))
+    {
+        switch (cursor)
+        {
+            // Play the Game
+            case 0:
+                inst = instance_create(0,0,obj_fade)
+                inst.destination = rm_game
+                break
+            
+            // Show the Controls
+            case 1:
+                break
+            
+            // Show the highscores
+            case 2:
+                break
+            
+            // Show the options
+            case 3:
+                break
+            
+            // Exit the Game
+            case 4:
+                game_end()
+                break
+        }
+    }
+    
 }
+
+if (keyboard_check_pressed(vk_enter) &amp;&amp; !menu)
+{
+    menu = true
+    flash = false
+    alarm[0] = -1
+}
+
+
+
 </string>
           </argument>
         </arguments>
@@ -60,8 +186,26 @@ draw_set_valign(fa_middle)
 draw_text(display_get_gui_width()/2,display_get_height()/3,"Don't Give Up!")
 var ht = string_height("Don't Give Up!")
 
-draw_set_font(ft_start_menu)
-draw_text(display_get_gui_width()/2,display_get_height()/3+ht,"Press Enter to Play")
+if (flash)
+{
+    draw_set_font(ft_start_menu)
+    draw_text(display_get_gui_width()/2,display_get_height()/3+ht,"Press Enter to Play")
+}
+
+if (menu &amp;&amp; !instance_exists(obj_fade))
+{
+    draw_set_font(ft_start_menu)
+    
+    draw_text_colour(display_get_gui_width()/2,display_get_height()/3+ht,"Play",menu0,menu0,menu0,menu0,1)
+    ht += string_height("Play")
+    draw_text_colour(display_get_gui_width()/2,display_get_height()/3+ht,"Controls",menu1,menu1,menu1,menu1,1)
+    ht += string_height("Controls")
+    draw_text_colour(display_get_gui_width()/2,display_get_height()/3+ht,"Highscores",menu2,menu2,menu2,menu2,1)
+    ht += string_height("Highscores")
+    draw_text_colour(display_get_gui_width()/2,display_get_height()/3+ht,"Options",menu3,menu3,menu3,menu3,1)
+    ht += string_height("Options")
+    draw_text_colour(display_get_gui_width()/2,display_get_height()/3+ht,"Exit",menu4,menu4,menu4,menu4,1)
+}
 
 </string>
           </argument>
