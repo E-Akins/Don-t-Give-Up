@@ -276,6 +276,7 @@ if (gameover)
         inst.destination = rm_menu
         inst.gameover = true
         inst.alarm_delay = 10
+        global.pointspass = obj_score.points
     }
     
 }
@@ -283,9 +284,11 @@ if (gameover)
 // Horizontal Movement
 x += hspd
 
-
-
-
+// Running Sound 
+if (!audio_is_playing(sfx_running))
+{
+    audio_play_sound(sfx_running,10,false)
+}
 
 </string>
           </argument>

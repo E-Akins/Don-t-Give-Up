@@ -17,6 +17,9 @@
     <sound>sound\sfx_bear2</sound>
     <sound>sound\sfx_bear3</sound>
     <sound>sound\sfx_rock</sound>
+    <sound>sound\sfx_bloom</sound>
+    <sound>sound\sfx_running</sound>
+    <sound>sound\sfx_applause</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_coach</sprite>
@@ -69,6 +72,8 @@
     <object>objects\obj_air_manager</object>
     <object>objects\obj_start_menu</object>
     <object>objects\obj_music_manager</object>
+    <object>objects\obj_pause_menu</object>
+    <object>objects\obj_highscore_add</object>
     <objects name="Obstacles">
       <object>objects\obj_sleeping_bear</object>
       <object>objects\obj_bird</object>
@@ -83,7 +88,6 @@
       <object>objects\obj_flower</object>
       <object>objects\obj_water_gauge</object>
     </objects>
-    <object>objects\obj_pause_menu</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_start</room>

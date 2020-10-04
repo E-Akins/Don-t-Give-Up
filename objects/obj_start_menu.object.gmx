@@ -29,6 +29,10 @@
 menu = false
 cursor = 0
 
+//check flag to add points to highscore
+highscore_flag = 1 
+highscore_input = noone
+
 menutype = "main"
 
 /*menu tpyes:
@@ -46,20 +50,6 @@ menu4 = c_black
 
 o_music = false
 o_sfx = false
-
-//default highscores
-highscore_clear()
-highscore_add("TEM",10)
-highscore_add("PER",9)
-highscore_add("ARP",8)
-highscore_add("MGK",7)
-highscore_add("AAA",6)
-highscore_add("CAP",5)
-highscore_add("KEY",4)
-highscore_add("POP",3)
-highscore_add("JFK",2)
-highscore_add("IRS",1)
-
 
 </string>
           </argument>
@@ -138,7 +128,10 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
         audio_sound_gain(sfx_bear1,global.sfx,0)
         audio_sound_gain(sfx_bear2,global.sfx,0)
         audio_sound_gain(sfx_bear3,global.sfx,0)
-        audio_sound_gain(sfx_rock,global.sfx,0)        
+        audio_sound_gain(sfx_rock,global.sfx,0)    
+        audio_sound_gain(sfx_bloom,global.sfx,0)   
+        audio_sound_gain(sfx_running,global.sfx,0) 
+        audio_sound_gain(sfx_applause,global.sfx,0)    
         
         if (keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_left) || keyboard_check_pressed(ord("D")) || keyboard_check_pressed(ord("A")))                
             audio_play_sound(sfx_powerup,10,false)         
@@ -186,8 +179,12 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
             case "highscores":
             {
                 //Go back to the main menu
-                menutype = "main"
-                cursor = 0
+                if !instance_exists(obj_highscore_add)
+                {
+                    menutype = "main"
+                    cursor = 0
+                    global.pointspass = 0 //resets pointspass from previous games    
+                }
                 break
             }
             
@@ -347,6 +344,9 @@ if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "main")
 //draw controls menu
 if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "controls")
 {
+
+    //draw_sprite()
+    
     draw_set_font(ft_start_menu)
     draw_text_colour(display_get_gui_width()/2,display_get_gui_height()/3+ht,"WASD: Movement",menu0,menu0,menu0,menu0,1)
     ht += string_height("WASD: Movement")
@@ -453,11 +453,13 @@ if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "options")
 //draw highscores
 if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "highscores")
 {
-    draw_highscore(10+string_width("AAA"),10+string_height("AAA"),display_get_gui_width(),display_get_gui_height()/3*2)
-    
+    draw_sprite_ext(spr_button,0,display_get_gui_width()/2,display_get_gui_height()/2-ht/3,3,3.75,0,c_white,1)
+    draw_highscore(string_width("AAA")/2+display_get_gui_width()/3,display_get_gui_height()/10*1,display_get_gui_width()/3*2,display_get_gui_height()/10*9)
+    draw_sprite(spr_coach,0,display_get_gui_width()/20*3,display_get_gui_height()/10*3)
     draw_set_font(ft_start_menu)
-    draw_text_colour(display_get_gui_width()/2,display_get_gui_height()/3*2+ht,"Main Menu",menu0,menu0,menu0,menu0,1)
     ht += string_height("Main Menu")
+    draw_text_colour(display_get_gui_width()/2,display_get_gui_height()/4*3+ht,"Main Menu",menu0,menu0,menu0,menu0,1)
+   
 }
 </string>
           </argument>
