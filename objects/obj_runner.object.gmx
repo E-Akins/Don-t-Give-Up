@@ -315,6 +315,7 @@ if (!other.hit)
     if (boosted)
     {
         other.hit = true
+        audio_play_sound(sfx_rock, 10, false);
     }
     else
     {
@@ -355,10 +356,26 @@ if (!other.hit)
           <argument>
             <kind>1</kind>
             <string>
-if (image_xscale &gt;= 1.5)
+if (image_xscale &gt;= 1.5 &amp;&amp; !other.fly)
 {
     other.sprite_index = spr_bear_awake
     other.fly = true
+    
+    var i = irandom_range(0,2)
+    
+    switch (i)
+    {
+        case 0:
+            audio_play_sound(sfx_bear1, 10, false);
+            break
+        case 1:
+            audio_play_sound(sfx_bear2, 10, false);
+            break
+        case 2:
+            audio_play_sound(sfx_bear3, 10, false);
+            break
+    }
+    
 }
 else
 {
@@ -474,6 +491,31 @@ if (other.touched == false)
     other.touched = true
     shrink = false
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="3">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+scr_save()
+
 </string>
           </argument>
         </arguments>

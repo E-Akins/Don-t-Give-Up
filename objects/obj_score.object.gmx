@@ -49,15 +49,16 @@
           <argument>
             <kind>1</kind>
             <string>
-if (obj_start_timer.time &lt; 0 &amp;&amp; !obj_runner.gameover)
-{
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_right)
-    draw_set_font(ft_points)
-    draw_set_color(c_black)
-    draw_sprite(spr_button2,0,display_get_gui_width() - 20 - 150,20+58)
-    draw_text(display_get_gui_width() - 20 - 55,20+35,string(points))
-}
+if (instance_exists(obj_start_timer) &amp;&amp; instance_exists(obj_runner))
+    if (obj_start_timer.time &lt; 0 &amp;&amp; !obj_runner.gameover)
+    {
+        draw_set_valign(fa_top)
+        draw_set_halign(fa_right)
+        draw_set_font(ft_points)
+        draw_set_color(c_black)
+        draw_sprite(spr_button2,0,display_get_gui_width() - 20 - 150,20+58)
+        draw_text(display_get_gui_width() - 20 - 55,20+35,string(points))
+    }
 
 </string>
           </argument>

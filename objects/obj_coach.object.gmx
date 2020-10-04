@@ -79,12 +79,8 @@ alarm[1] = -1
             <kind>1</kind>
             <string>
 // Take into account that the skip makes the runner 
-
 var pos_x = irandom_range(-100,100)
-
 instance_create(x+pos_x,y,obj_rain)
-instance_create(x+pos_x+room_width*-1,y,obj_rain)
-instance_create(x+pos_x+room_width*1,y,obj_rain)
 
 </string>
           </argument>
@@ -111,7 +107,7 @@ instance_create(x+pos_x+room_width*1,y,obj_rain)
             <string>
 if (instance_exists(obj_runner)) if (!obj_runner.gameover) x += obj_runner.hspd
 
-if (obj_start_timer.time &lt; 0)
+if (obj_start_timer.time &lt; 0 &amp;&amp; !obj_runner.gameover)
 {
 
     x += max(keyboard_check(ord("D")),0)*spd
@@ -120,8 +116,8 @@ if (obj_start_timer.time &lt; 0)
     y += max(keyboard_check(ord("S")),0)*spd
     y -= max(keyboard_check(ord("W")),0)*spd
     
-    //x = clamp(x,view_xport[0],obj_runner.x+1000-320)
-    y = clamp(y,view_yport[0]-250,view_yport[0]+view_hport[0]-250)
+    x = clamp(x,view_xview[0]+sprite_get_width(sprite_index)/4,view_xview[0]+sprite_get_width(sprite_index)/4+1920-sprite_get_width(sprite_index)/2)
+    y = clamp(y,view_yview[0]+sprite_get_height(sprite_index)/4,view_yview[0]+sprite_get_height(sprite_index)/4+1080-sprite_get_height(sprite_index)/2)
 
     if (instance_exists(obj_water_gauge))        
         if (keyboard_check(ord("J")) &amp;&amp; obj_water_gauge.currentwater &gt; 0) 
@@ -132,20 +128,15 @@ if (obj_start_timer.time &lt; 0)
     
     if (keyboard_check_pressed(ord("K")) &amp;&amp; alarm[1] == -1) 
     {
-        inst = instance_create(x,y,obj_drink)
-        inst1 = instance_create(x+room_width*-1,y,obj_drink)
-        inst2 = instance_create(x+room_width*1,y,obj_drink)
-        
-        inst.connect1 = inst1
-        inst.connect2 = inst2
-        inst1.connect1 = inst
-        inst1.connect2 = inst2
-        inst2.connect1 = inst1
-        inst2.connect2 = inst               
-        
+        instance_create(x,y,obj_drink)              
         alarm[1] = drink_delay
     }
-
+    
+    if (keyboard_check_pressed(vk_escape))
+    {
+        instance_deactivate_all(false)
+        instance_create(x,y,obj_pause_menu)
+    }
 }
 </string>
           </argument>

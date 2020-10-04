@@ -113,16 +113,16 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
 {
     if (menutype == "main" || (menutype == "options" &amp;&amp; !o_sfx &amp;&amp; !o_music))
     {
-        cursor += max(keyboard_check_pressed(vk_down),0)
-        cursor -= max(keyboard_check_pressed(vk_up),0)
+        cursor += max(keyboard_check_pressed(vk_down),keyboard_check_pressed(ord("S")),0)
+        cursor -= max(keyboard_check_pressed(vk_up),keyboard_check_pressed(ord("W")),0)
         if menutype = "main" cursor = scr_clamp_w_loop(cursor,0,4)
         if menutype = "options" cursor = scr_clamp_w_loop(cursor,0,3)
     }
     
     if (o_music)
     {
-        global.music += max(keyboard_check_pressed(vk_right),0)*0.1
-        global.music -= max(keyboard_check_pressed(vk_left),0)*0.1
+        global.music += max(keyboard_check_pressed(vk_right),keyboard_check_pressed(ord("D")),0)*0.1
+        global.music -= max(keyboard_check_pressed(vk_left),keyboard_check_pressed(ord("A")),0)*0.1
         global.music = clamp(global.music,0,1)
         audio_sound_gain(thm_menu,global.music,0)
         audio_sound_gain(thm_game,global.music,0)
@@ -130,13 +130,17 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
     
     if (o_sfx)
     {
-        global.sfx += max(keyboard_check_pressed(vk_right),0)*0.1
-        global.sfx -= max(keyboard_check_pressed(vk_left),0)*0.1
+        global.sfx += max(keyboard_check_pressed(vk_right),keyboard_check_pressed(ord("D")),0)*0.1
+        global.sfx -= max(keyboard_check_pressed(vk_left),keyboard_check_pressed(ord("A")),0)*0.1
         global.sfx = clamp(global.sfx,0,1)    
         audio_sound_gain(sfx_powerup,global.sfx,0)
         audio_sound_gain(sfx_hurt4,global.sfx,0)
+        audio_sound_gain(sfx_bear1,global.sfx,0)
+        audio_sound_gain(sfx_bear2,global.sfx,0)
+        audio_sound_gain(sfx_bear3,global.sfx,0)
+        audio_sound_gain(sfx_rock,global.sfx,0)        
         
-        if (keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_left))                
+        if (keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_left) || keyboard_check_pressed(ord("D")) || keyboard_check_pressed(ord("A")))                
             audio_play_sound(sfx_powerup,10,false)         
     }  
     
@@ -195,9 +199,15 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
                     //Full Screen
                     case 0:
                         if window_get_fullscreen()
+                        {
                             window_set_fullscreen(false)
+                            global.fullscreeen = false
+                        }
                         else
+                        {
                             window_set_fullscreen(true)
+                            global.fullscreen = true
+                        }
                             
                         break
                         
@@ -314,7 +324,7 @@ if (!menu)
 if (flash)
 {
     draw_set_font(ft_start_menu)
-    draw_text(display_get_gui_width()/2,display_get_gui_height()/3+ht+20+250,"Press Enter to Play")
+    draw_text_transformed(display_get_gui_width()/2,display_get_gui_height()/3+ht+20+250,"Press Enter to Play",1,1,2.5)
 }
 
 //draw main menu
@@ -351,7 +361,7 @@ if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "options")
 {
     draw_set_font(ft_options)
     
-    draw_sprite_ext(spr_button,0,150*6 + 150*.65,150*4,6,2,0,c_white,1)
+    draw_sprite_ext(spr_button,0,150*6 + 150*.45,150*4,6,2,0,c_white,1)
     
     if window_get_fullscreen()
     {
@@ -370,17 +380,64 @@ if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "options")
     
     var flower_m = global.music * 10
     
+    switch (flower_m)
+    {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            var subimage = 0
+            break
+        
+        case 4:
+        case 5:    
+        case 6:
+            var subimage = 1
+            break
+    
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+            var subimage = 2
+            break
+    }
+    
     for (var i = 0; i &lt; flower_m; i++)
     {
-        draw_sprite_ext(spr_flower1,2,display_get_gui_width()/4 + sprite_get_width(spr_flower1)*.25*i + string_width("Music Volume: ") - 25,display_get_gui_height()/3+ht - 60,.25,.25,0,c_white,1)
+        draw_sprite_ext(spr_flower1,subimage,display_get_gui_width()/4 + sprite_get_width(spr_flower1)*.25*i + string_width("Music Volume: ") - 25,display_get_gui_height()/3+ht - 60,.25,.25,0,c_white,1)
     }  
     draw_text_colour(display_get_gui_width()/2.5,display_get_gui_height()/3+ht - 60,"Music Volume: ",menu1,menu1,menu1,menu1,1)
     ht += string_height("Music Volume: ")
     
     var flower_s = global.sfx * 10
+    
+    switch (flower_s)
+    {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            var subimage = 0
+            break
+        
+        case 4:
+        case 5:    
+        case 6:
+            var subimage = 1
+            break
+    
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+            var subimage = 2
+            break
+    }    
+    
     for (var i = 0; i &lt; flower_s; i++)
     {
-        draw_sprite_ext(spr_flower2,2,display_get_gui_width()/4 + sprite_get_width(spr_flower1)*.25*i + string_width("Music Volume: ") - 25,display_get_gui_height()/3+ht - 40,.25,.25,0,c_white,1)
+        draw_sprite_ext(spr_flower2,subimage,display_get_gui_width()/4 + sprite_get_width(spr_flower1)*.25*i + string_width("Music Volume: ") - 25,display_get_gui_height()/3+ht - 40,.25,.25,0,c_white,1)
     }
     draw_text_colour(display_get_gui_width()/2.5,display_get_gui_height()/3+ht - 40,"SFX Volume: ",menu2,menu2,menu2,menu2,1)
     ht += string_height("Sfx Volume: ")

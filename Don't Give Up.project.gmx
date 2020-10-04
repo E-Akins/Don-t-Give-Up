@@ -13,6 +13,10 @@
     <sound>sound\sfx_hurt3</sound>
     <sound>sound\sfx_hurt4</sound>
     <sound>sound\sfx_hurt5</sound>
+    <sound>sound\sfx_bear1</sound>
+    <sound>sound\sfx_bear2</sound>
+    <sound>sound\sfx_bear3</sound>
+    <sound>sound\sfx_rock</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_coach</sprite>
@@ -43,6 +47,8 @@
     <script>scripts\scr_initialize.gml</script>
     <script>scripts\scr_clamp_w_loop.gml</script>
     <script>scripts\scr_draw_circle_portion.gml</script>
+    <script>scripts\scr_save.gml</script>
+    <script>scripts\scr_load.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_title</font>
@@ -77,6 +83,7 @@
       <object>objects\obj_flower</object>
       <object>objects\obj_water_gauge</object>
     </objects>
+    <object>objects\obj_pause_menu</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_start</room>
