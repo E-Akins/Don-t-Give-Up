@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="0">
+    <event eventtype="7" enumb="4">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -30,16 +30,14 @@ switch (room)
 {
     case rm_menu: 
         audio_stop_sound(thm_game) 
-        if (!audio_is_playing(thm_menu))
-            audio_play_sound(thm_menu, 10, true);
+        audio_sound_gain(thm_menu, 1, 3000);
+        if (!audio_is_playing(thm_menu)) audio_play_sound(thm_menu, 10, true);
+        
         break
     
     case rm_game:
-        audio_stop_sound(thm_menu)
-        if (instance_exists(obj_start_timer) &amp;&amp; instance_exists(obj_runner))
-            if (obj_start_timer.time &lt;= 0 &amp;&amp; !obj_runner.gameover)
-                if (!audio_is_playing(thm_game))
-                    audio_play_sound(thm_game, 10, true);    
+        audio_sound_gain(thm_menu, 0, 500);
+        audio_play_sound(thm_game, 10, true);    
         break
 }
 

@@ -29,11 +29,8 @@
 menu = false
 cursor = 0
 
-//volume variables; 1 = 100%
-global.music_volume = 1
-global.sfx_volume = 1
-
 menutype = "main"
+
 /*menu tpyes:
 main
 controls
@@ -46,6 +43,9 @@ menu1 = c_black
 menu2 = c_black
 menu3 = c_black
 menu4 = c_black
+
+o_music = false
+o_sfx = false
 
 //default highscores
 highscore_clear()
@@ -111,15 +111,34 @@ highscore_add("IRS",1)
 
 if (menu &amp;&amp; !instance_exists(obj_fade))
 {
-    if menutype = "main" || menutype = "options"
+    if (menutype == "main" || (menutype == "options" &amp;&amp; !o_sfx &amp;&amp; !o_music))
     {
-    cursor += max(keyboard_check_pressed(vk_down),0)
-    cursor -= max(keyboard_check_pressed(vk_up),0)
-    if menutype = "main"
-        cursor = scr_clamp_w_loop(cursor,0,4)
-    if menutype = "options"
-        cursor = scr_clamp_w_loop(cursor,0,3)
+        cursor += max(keyboard_check_pressed(vk_down),0)
+        cursor -= max(keyboard_check_pressed(vk_up),0)
+        if menutype = "main" cursor = scr_clamp_w_loop(cursor,0,4)
+        if menutype = "options" cursor = scr_clamp_w_loop(cursor,0,3)
     }
+    
+    if (o_music)
+    {
+        global.music += max(keyboard_check_pressed(vk_right),0)*0.1
+        global.music -= max(keyboard_check_pressed(vk_left),0)*0.1
+        global.music = clamp(global.music,0,1)
+        audio_sound_gain(thm_menu,global.music,0)
+        audio_sound_gain(thm_game,global.music,0)
+    }
+    
+    if (o_sfx)
+    {
+        global.sfx += max(keyboard_check_pressed(vk_right),0)*0.1
+        global.sfx -= max(keyboard_check_pressed(vk_left),0)*0.1
+        global.sfx = clamp(global.sfx,0,1)    
+        audio_sound_gain(sfx_powerup,global.sfx,0)
+        audio_sound_gain(sfx_hurt4,global.sfx,0)
+        
+        if (keyboard_check_pressed(vk_right) || keyboard_check_pressed(vk_left))                
+            audio_play_sound(sfx_powerup,10,false)         
+    }  
     
     menu0 = c_black
     menu1 = c_black
@@ -184,14 +203,12 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
                         
                     //Music Volume
                     case 1:
-                        global.music_volume += 0.1
-                        global.music_volume = scr_clamp_w_loop(global.music_volume,0,1)
+                        o_music = !o_music
                         break
                         
                     //Sfx Volume
                     case 2:
-                        global.sfx_volume += 0.1
-                        global.sfx_volume = scr_clamp_w_loop(global.sfx_volume,0,1)
+                        o_sfx = !o_sfx
                         break
                     
                     //Main Menu
@@ -204,7 +221,7 @@ if (menu &amp;&amp; !instance_exists(obj_fade))
             
             
             //Main Menu
-            case "main":
+            case ("main"):
             {
                 switch (cursor)
                 {
@@ -248,10 +265,8 @@ if (keyboard_check_pressed(vk_enter) &amp;&amp; !menu)
     alarm[0] = -1
 }
 
-if (instance_exists(obj_fade))
-{
-    image_alpha = 1 - obj_fade.alpha
-}
+if (instance_exists(obj_fade)) image_alpha = 1 - obj_fade.alpha
+
 
 
 
@@ -336,7 +351,7 @@ if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "options")
 {
     draw_set_font(ft_options)
     
-    draw_sprite_ext(spr_button,0,150*5 + 150*1.5,150*4,5,2,0,c_white,1)
+    draw_sprite_ext(spr_button,0,150*6 + 150*.65,150*4,6,2,0,c_white,1)
     
     if window_get_fullscreen()
     {
@@ -353,9 +368,21 @@ if (menu &amp;&amp; !instance_exists(obj_fade) &amp;&amp; menutype = "options")
     draw_set_halign(fa_right)
     draw_set_valign(fa_middle)    
     
-    draw_text_colour(display_get_gui_width()/2,display_get_gui_height()/3+ht - 60,"Music Volume: " + string_format(global.music_volume * 100,1,0),menu1,menu1,menu1,menu1,1)
+    var flower_m = global.music * 10
+    
+    for (var i = 0; i &lt; flower_m; i++)
+    {
+        draw_sprite_ext(spr_flower1,2,display_get_gui_width()/4 + sprite_get_width(spr_flower1)*.25*i + string_width("Music Volume: ") - 25,display_get_gui_height()/3+ht - 60,.25,.25,0,c_white,1)
+    }  
+    draw_text_colour(display_get_gui_width()/2.5,display_get_gui_height()/3+ht - 60,"Music Volume: ",menu1,menu1,menu1,menu1,1)
     ht += string_height("Music Volume: ")
-    draw_text_colour(display_get_gui_width()/2,display_get_gui_height()/3+ht - 40,"Sfx Volume: "+ string_format(global.sfx_volume * 100,1,0),menu2,menu2,menu2,menu2,1)
+    
+    var flower_s = global.sfx * 10
+    for (var i = 0; i &lt; flower_s; i++)
+    {
+        draw_sprite_ext(spr_flower2,2,display_get_gui_width()/4 + sprite_get_width(spr_flower1)*.25*i + string_width("Music Volume: ") - 25,display_get_gui_height()/3+ht - 40,.25,.25,0,c_white,1)
+    }
+    draw_text_colour(display_get_gui_width()/2.5,display_get_gui_height()/3+ht - 40,"SFX Volume: ",menu2,menu2,menu2,menu2,1)
     ht += string_height("Sfx Volume: ")
     
     draw_set_color(c_black)
