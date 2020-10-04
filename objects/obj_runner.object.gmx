@@ -176,6 +176,9 @@ else
         if (instance_exists(obj_coach)) obj_coach.x -= room_width 
         obj_gnd_manager.spawned = true  
         obj_air_manager.spawned = true
+        with(obj_air_manager){
+            if (spawned &amp;&amp; instance_exists(inst)) with(inst){instance_destroy()}
+        }
     }
 }
 
@@ -272,6 +275,7 @@ if (gameover)
         inst = instance_create(x,y,obj_fade)
         inst.destination = rm_menu
         inst.gameover = true
+        inst.alarm_delay = 10
     }
     
 }
@@ -322,6 +326,8 @@ if (!other.hit)
             vspd -= 70
             hspd = 0
             grav = 5
+            audio_stop_all()
+            audio_play_sound(sfx_hurt4, 10, false);
         }
     }
 }
@@ -364,6 +370,8 @@ else
         vspd -= 70     
         hspd = 0
         grav = 5
+        audio_stop_all()
+        audio_play_sound(sfx_hurt4, 10, false);
     }
 }
 </string>
@@ -392,6 +400,7 @@ else
 alarm[3] = 40
 
 instance_destroy(other)
+audio_play_sound(sfx_powerup, 10, false);
 
 </string>
           </argument>
@@ -425,6 +434,8 @@ if (!gameover)
     vspd -= 70     
     hspd = 0
     grav = 5
+    audio_stop_all()
+    audio_play_sound(sfx_hurt4, 10, false);
 }
 
 </string>

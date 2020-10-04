@@ -4,7 +4,16 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\thm_menu</sound>
+    <sound>sound\thm_game</sound>
+    <sound>sound\sfx_powerup</sound>
+    <sound>sound\sfx_hurt1</sound>
+    <sound>sound\sfx_hurt2</sound>
+    <sound>sound\sfx_hurt3</sound>
+    <sound>sound\sfx_hurt4</sound>
+    <sound>sound\sfx_hurt5</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_coach</sprite>
     <sprite>sprites\spr_runner</sprite>
@@ -23,6 +32,7 @@
     <sprite>sprites\spr_water_gauge_outline</sprite>
     <sprite>sprites\spr_water_gauge_inside</sprite>
     <sprite>sprites\spr_button2</sprite>
+    <sprite>sprites\spr_title</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_forest</background>
@@ -40,6 +50,7 @@
     <font>fonts\ft_start_menu</font>
     <font>fonts\ft_start_timer</font>
     <font>fonts\ft_flower_points</font>
+    <font>fonts\ft_options</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_runner</object>
@@ -51,6 +62,7 @@
     <object>objects\obj_gnd_manager</object>
     <object>objects\obj_air_manager</object>
     <object>objects\obj_start_menu</object>
+    <object>objects\obj_music_manager</object>
     <objects name="Obstacles">
       <object>objects\obj_sleeping_bear</object>
       <object>objects\obj_bird</object>

@@ -41,6 +41,35 @@ image_speed = 0
 
 counter = 0
 points = false
+float = 0
+alpha = 1
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+float += 10
+alpha -= .2
 
 </string>
           </argument>
@@ -65,7 +94,11 @@ points = false
           <argument>
             <kind>1</kind>
             <string>
-if (counter &gt;= 5) image_index += 1
+if (counter &gt;= 2) 
+{
+    counter = 0
+    image_index += 1
+}
 
 image_index = clamp(image_index,0,2)
 
@@ -74,6 +107,8 @@ if (image_index == 2 &amp;&amp; !points)
     obj_score.points += 10
     points = true   
 }
+
+if (points) if (alarm[0] == -1) alarm[0] = 2
 
 </string>
           </argument>
@@ -104,6 +139,39 @@ if (!other.flower_touched)
     other.flower_touched = true
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+draw_self()
+
+// Draws the points earned 
+if (image_index == 2)
+{
+    draw_set_valign(fa_middle)
+    draw_set_halign(fa_center)
+    draw_set_font(ft_flower_points)
+    draw_text_colour(x,y-float,"+10",c_green,c_green,c_green,c_green,alpha)
+}
 </string>
           </argument>
         </arguments>
