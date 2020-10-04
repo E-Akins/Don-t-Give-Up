@@ -20,6 +20,7 @@
     <sound>sound\sfx_bloom</sound>
     <sound>sound\sfx_running</sound>
     <sound>sound\sfx_applause</sound>
+    <sound>sound\sfx_rain</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_coach</sprite>
@@ -60,6 +61,7 @@
     <font>fonts\ft_start_timer</font>
     <font>fonts\ft_flower_points</font>
     <font>fonts\ft_options</font>
+    <font>fonts\ft_controls_menu</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_runner</object>
@@ -87,6 +89,15 @@
       <object>objects\obj_cloud</object>
       <object>objects\obj_flower</object>
       <object>objects\obj_water_gauge</object>
+    </objects>
+    <objects name="Controls Menu">
+      <object>objects\obj_runner_c</object>
+      <object>objects\obj_bear_c</object>
+      <object>objects\obj_rock_c</object>
+      <object>objects\obj_bird_c</object>
+      <object>objects\obj_drink_c</object>
+      <object>objects\obj_rain_c</object>
+      <object>objects\obj_flower_c</object>
     </objects>
   </objects>
   <rooms name="rooms">

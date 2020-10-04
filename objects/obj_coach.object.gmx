@@ -119,12 +119,22 @@ if (obj_start_timer.time &lt; 0 &amp;&amp; !obj_runner.gameover)
     x = clamp(x,view_xview[0]+sprite_get_width(sprite_index)/4,view_xview[0]+sprite_get_width(sprite_index)/4+1920-sprite_get_width(sprite_index)/2)
     y = clamp(y,view_yview[0]+sprite_get_height(sprite_index)/4,view_yview[0]+sprite_get_height(sprite_index)/4+1080-sprite_get_height(sprite_index)/2)
 
-    if (instance_exists(obj_water_gauge))        
+    if (instance_exists(obj_water_gauge))  
+    {      
         if (keyboard_check(ord("J")) &amp;&amp; obj_water_gauge.currentwater &gt; 0) 
         {
             if (alarm[0] == -1) alarm[0] = 2
             obj_water_gauge.currentwater -= 1
+            if (!audio_is_playing(sfx_rain))
+            {
+                audio_play_sound(sfx_rain,10,false)
+            }
         }
+        else
+        {
+            if (audio_is_playing(sfx_rain)) audio_stop_sound(sfx_rain)
+        }
+    }
     
     if (keyboard_check_pressed(ord("K")) &amp;&amp; alarm[1] == -1) 
     {

@@ -82,8 +82,11 @@ fade = true
             <kind>1</kind>
             <string>
 if (fade &amp;&amp; alpha == 0)
+{
     instance_destroy()
-
+    if instance_exists(obj_highscore_add) obj_highscore_add.visible = true
+}
+    
 if (gameover)
 {
     if (instance_exists(obj_start_menu))

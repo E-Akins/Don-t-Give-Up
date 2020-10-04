@@ -277,8 +277,7 @@ if (gameover)
         inst.gameover = true
         inst.alarm_delay = 10
         global.pointspass = obj_score.points
-    }
-    
+    }  
 }
 
 // Horizontal Movement
@@ -287,7 +286,7 @@ x += hspd
 // Running Sound 
 if (!audio_is_playing(sfx_running))
 {
-    audio_play_sound(sfx_running,10,false)
+    //audio_play_sound(sfx_running,10,false)
 }
 
 </string>
@@ -380,7 +379,8 @@ if (image_xscale &gt;= 1.5 &amp;&amp; !other.fly)
     }
     
 }
-else
+
+if (image_xscale &lt; 1.5 &amp;&amp; !other.fly)
 {
     // Game Over and runner falls off screen
     //room_restart()
