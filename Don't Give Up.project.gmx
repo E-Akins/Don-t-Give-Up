@@ -15,9 +15,13 @@
     <sprite>sprites\spr_bear_sleep</sprite>
     <sprite>sprites\spr_bear_awake</sprite>
     <sprite>sprites\spr_cloud</sprite>
-    <sprite>sprites\spr_manager</sprite>
     <sprite>sprites\spr_flower1</sprite>
     <sprite>sprites\spr_flower2</sprite>
+    <sprite>sprites\spr_button</sprite>
+    <sprite>sprites\spr_rock</sprite>
+    <sprite>sprites\spr_water_gauge</sprite>
+    <sprite>sprites\spr_water_gauge_outline</sprite>
+    <sprite>sprites\spr_water_gauge_inside</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_forest</background>
@@ -27,36 +31,39 @@
   <scripts name="scripts">
     <script>scripts\scr_initialize.gml</script>
     <script>scripts\scr_clamp_w_loop.gml</script>
+    <script>scripts\scr_draw_circle_portion.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\ft_title</font>
     <font>fonts\ft_points</font>
     <font>fonts\ft_start_menu</font>
     <font>fonts\ft_start_timer</font>
+    <font>fonts\ft_flower_points</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_runner</object>
     <object>objects\obj_coach</object>
     <object>objects\obj_ground</object>
-    <object>objects\obj_cloud</object>
     <object>objects\obj_fade</object>
     <object>objects\obj_score</object>
     <object>objects\obj_start_timer</object>
     <object>objects\obj_gnd_manager</object>
     <object>objects\obj_air_manager</object>
-    <object>objects\obj_gnd_object</object>
-    <object>objects\obj_air_object</object>
+    <object>objects\obj_start_menu</object>
     <objects name="Obstacles">
-      <object>objects\obj_bear</object>
+      <object>objects\obj_sleeping_bear</object>
+      <object>objects\obj_bird</object>
+      <object>objects\obj_rock</object>
     </objects>
     <objects name="Power Ups">
       <object>objects\obj_rain</object>
       <object>objects\obj_drink</object>
     </objects>
-    <objects name="Enemies">
-      <object>objects\obj_bird</object>
+    <objects name="Extras">
+      <object>objects\obj_cloud</object>
+      <object>objects\obj_flower</object>
+      <object>objects\obj_water_gauge</object>
     </objects>
-    <object>objects\obj_start_menu</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_start</room>

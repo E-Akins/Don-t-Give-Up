@@ -54,7 +54,8 @@ if (obj_start_timer.time &lt; 0)
     draw_set_valign(fa_top)
     draw_set_halign(fa_right)
     draw_set_font(ft_points)
-    draw_text(display_get_gui_width(),0,string(points) + " m")
+    draw_set_color(c_black)
+    draw_text(display_get_gui_width() - 20,20,string(points))
 }
 
 </string>
