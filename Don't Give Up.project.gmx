@@ -22,6 +22,7 @@
     <sprite>sprites\spr_water_gauge</sprite>
     <sprite>sprites\spr_water_gauge_outline</sprite>
     <sprite>sprites\spr_water_gauge_inside</sprite>
+    <sprite>sprites\spr_button2</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_forest</background>
@@ -69,6 +70,7 @@
     <room>rooms\rm_start</room>
     <room>rooms\rm_menu</room>
     <room>rooms\rm_game</room>
+    <room>rooms\rm_gameover</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

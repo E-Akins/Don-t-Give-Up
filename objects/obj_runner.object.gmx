@@ -241,31 +241,43 @@ if (room == rm_game &amp;&amp; !gameover)
     }
 }
 
-if (room = rm_menu)
-{
-    hspd = 20
-}
+if (room == rm_menu) hspd = 20
 
 // Collision Events
 vspd += grav
-if (place_meeting(x,y+vspd,obj_ground))
+if (place_meeting(x,y+vspd,obj_ground) &amp;&amp; !gameover)
 {
     while(!place_meeting(x,y+sign(vspd),obj_ground)) y += sign(vspd)
     vspd = 0
 }
 y += vspd
 
-// Horizontal Movement
-x += hspd
-
 // Shrink to normal size
-if (shrink) if (alarm[1] == -1) alarm[1] = 2
+if (shrink &amp;&amp; !gameover) if (alarm[1] == -1) alarm[1] = 2
 
 // Game Over Animation
 if (gameover)
 {
+    image_angle += 20
+    image_angle = clamp(image_angle,0,180)   
+    hspd = 0  
+    
+    if (vspd &gt; 0)
+    {
+        grav = 10
+    }
+    
+    if (y &gt; view_yport[0] + view_hport[0] &amp;&amp; !instance_exists(obj_fade))
+    {
+        inst = instance_create(x,y,obj_fade)
+        inst.destination = rm_menu
+        inst.gameover = true
+    }
     
 }
+
+// Horizontal Movement
+x += hspd
 
 
 
@@ -303,7 +315,14 @@ if (!other.hit)
     else
     {
         // Gameover
-        room_restart()
+        //room_restart()
+        if (!gameover)
+        {
+            gameover = true
+            vspd -= 70
+            hspd = 0
+            grav = 5
+        }
     }
 }
 
@@ -338,10 +357,14 @@ if (image_xscale &gt;= 1.5)
 else
 {
     // Game Over and runner falls off screen
-    room_restart()
-    
-       
-    
+    //room_restart()
+    if (!gameover &amp;&amp; !other.fly)
+    {
+        gameover = true      
+        vspd -= 70     
+        hspd = 0
+        grav = 5
+    }
 }
 </string>
           </argument>
@@ -369,6 +392,40 @@ else
 alarm[3] = 40
 
 instance_destroy(other)
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_bird">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+// Game Over and runner falls off screen
+//room_restart()
+
+if (!gameover)
+{
+    gameover = true      
+    vspd -= 70     
+    hspd = 0
+    grav = 5
+}
 
 </string>
           </argument>

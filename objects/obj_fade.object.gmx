@@ -29,6 +29,8 @@
 destination = rm_menu
 alpha = 0
 fade = false
+gameover = false
+
 
 </string>
           </argument>
@@ -82,6 +84,17 @@ fade = true
 if (fade &amp;&amp; alpha == 0)
     instance_destroy()
 
+if (gameover)
+{
+    if (instance_exists(obj_start_menu))
+    {
+        obj_start_menu.menutype = "highscores"
+        obj_start_menu.menu = true
+        obj_start_menu.flash = false
+        obj_start_menu.alarm[0] = -1
+    }
+}
+    
 </string>
           </argument>
         </arguments>

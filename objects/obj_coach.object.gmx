@@ -109,7 +109,7 @@ instance_create(x+pos_x+room_width*1,y,obj_rain)
           <argument>
             <kind>1</kind>
             <string>
-if (instance_exists(obj_runner)) x += obj_runner.hspd
+if (instance_exists(obj_runner)) if (!obj_runner.gameover) x += obj_runner.hspd
 
 if (obj_start_timer.time &lt; 0)
 {

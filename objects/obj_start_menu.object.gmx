@@ -279,11 +279,12 @@ draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
 
 // Button
-draw_sprite(spr_button,0,display_get_gui_width()/2,display_get_gui_height()/3)
+//draw_sprite(spr_button,0,display_get_gui_width()/2,display_get_gui_height()/3)
 
 //title
-if menutype != "highscores"
-draw_text(display_get_gui_width()/2,display_get_gui_height()/3,"Don't Give Up!")
+if (menutype != "highscores") draw_text(display_get_gui_width()/2,display_get_gui_height()/3,"Sprout Dash")
+
+
 var ht = string_height("Don't Give Up!")
     
 if (flash)
